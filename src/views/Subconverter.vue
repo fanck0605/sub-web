@@ -255,7 +255,7 @@ export default {
           ClashR: "clashr",
           Surge2: "surge&ver=2",
         },
-        backendOptions: [{ value: "http://127.0.0.1:25500/sub?" }],
+        backendOptions: [],
         remoteConfig: [
           {
             label: "universal",
@@ -386,6 +386,8 @@ export default {
     if (process.env.VUE_APP_USE_STORAGE === 'true') {
       this.form.sourceSubUrl = this.getLocalStorageItem('sourceSubUrl')
     }
+
+    this.options.backendOptions.unshift({value: `${window.location.origin}/sub?`})
   },
   mounted() {
     this.form.clientType = "clash";
