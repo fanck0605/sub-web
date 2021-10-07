@@ -1,16 +1,9 @@
-# ---- Dependencies ----
-FROM node:12-alpine AS dependencies
+# ---- Builder ----
+FROM node:lts-alpine AS builder
 WORKDIR /app
-COPY package.json ./
-RUN yarn install
+COPY . /app/
+RUN yarn install --frozen-lockfile && \
+    yarn build
 
-# ---- Build ----
-FROM dependencies AS build
-WORKDIR /app
-COPY . /app
-RUN yarn build
-
-FROM nginx:1.16-alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD [ "nginx", "-g", "daemon off;" ]
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html/
