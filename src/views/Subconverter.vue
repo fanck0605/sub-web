@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-row style="margin-top: 10px">
-      <el-col>
+    <div class="root-container">
+      <div class="card-container">
         <el-card>
           <div slot="header">
             Subscription Converter
@@ -180,8 +180,8 @@
             </el-form>
           </el-container>
         </el-card>
-      </el-col>
-    </el-row>
+      </div>
+    </div>
 
     <el-dialog
       :visible.sync="dialogUploadConfigVisible"
@@ -658,3 +658,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.root-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-container {
+  flex: 0 1 800px;
+}
+</style>
